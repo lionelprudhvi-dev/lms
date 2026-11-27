@@ -46,20 +46,19 @@ Enforced through `src/theme/theme.js` using a strict 8px grid (24px container pa
 ## 🚀 Quick Start Guide
 
 ### 1. Installation
-Clone repository and install dependencies:
+Clone the repository and install dependencies:
 ```bash
+git clone https://github.com/lionelprudhvi-dev/lms.git
+cd lms
 npm install
 ```
 
 ### 2. Environment Configuration
-The application comes preconfigured with `.env`. If using an external PostgreSQL instance, specify `DATABASE_URL`. If omitted, the embedded WASM PostgreSQL engine executes automatically with local disk persistence in `.pglite_data`.
-```env
-PORT=3000
-JWT_SECRET=super-secret-jwt-key-for-enterprise-lms-2026-production-grade
-NODE_ENV=development
-# Optional external Postgres:
-# DATABASE_URL=postgresql://postgres:password@localhost:5432/enterprise_lms
+Copy the example environment file:
+```bash
+cp .env.example .env
 ```
+If using an external PostgreSQL instance, specify `DATABASE_URL` in `.env`. If omitted, the embedded WASM PostgreSQL engine (`@electric-sql/pglite`) runs automatically with local disk persistence in `.pglite_data`.
 
 ### 3. Database Migration & Seeding
 Run schema migration (57 relational tables with UUID PKs, indexes, and constraints):
@@ -92,12 +91,13 @@ All seeded demo accounts share the password: **`Admin@123`**
 
 | Role | Email | Password | Access Scope |
 | :--- | :--- | :--- | :--- |
-| **Organization Admin** | `admin@apexlms.org` | `Admin@123` | Full access across all companies, RBAC matrix, finances, overrides |
-| **Company Admin** | `compadmin@apextech.com` | `Admin@123` | Admin access scoped to Apex Technologies Pvt Ltd |
-| **Trainer / Faculty** | `trainer@apextech.com` | `Admin@123` | Assigned training batches, student roster, batch attendance, materials |
-| **Student 1** | `rahul.sharma@apextech.com` | `Admin@123` | Student portal, GPS check-in, exams, certificates, fee installments |
-| **Student 2** | `kiran.kumar@apextech.com` | `Admin@123` | Student portal (shares public IP alert with Rahul) |
-| **Fee Staff** | `fees@apextech.com` | `Admin@123` | Fee collection desk, instant receipts, installment tracking |
+| **Organization Admin** | `admin@apexlms.com` | `Admin@123` | Full access across all companies, RBAC matrix, finances, overrides |
+| **Company Admin** | `ait.admin@apexlms.com` | `Admin@123` | Admin access scoped to Apex Institute of Technology |
+| **Trainer / Faculty** | `trainer.vikram@apexlms.com` | `Admin@123` | Assigned training batches, student roster, batch attendance, materials |
+| **Student 1 (Rahul)** | `student.rahul@apexlms.com` | `Admin@123` | Student portal, GPS check-in, exams, certificates, fee installments |
+| **Student 2 (Kiran)** | `student.kiran@apexlms.com` | `Admin@123` | Student portal (shares public IP alert with Rahul) |
+| **Student 3 (Priya)** | `student.priya@apexlms.com` | `Admin@123` | Student portal (Apex Business & Management Academy) |
+| **Fee Staff** | `fee.staff@apexlms.com` | `Admin@123` | Fee collection desk, instant receipts, installment tracking |
 
 *Quick login buttons are available directly on the `/login` split-screen page.*
 
@@ -116,7 +116,7 @@ All seeded demo accounts share the password: **`Admin@123`**
 - `/admin/attendance/ip-matches`: Public IP fraud detection review dashboard.
 - `/admin/attendance/overrides`: Historical immutable attendance audit log.
 - `/admin/exams` & `/admin/exams/questions`: Question bank and assessment setup.
-- `/admin/certificates`: Template designer, manual generation, and issued certificates log.
+- `/admin/certificates` & `/admin/certificates/templates`: Template designer, manual generation, and issued certificates log.
 - `/admin/fees`: Financial KPI overview with Recharts analytics.
 - `/admin/fees/collect`: Front-desk fee collection desk with instant A4 PDF receipts.
 - `/admin/fees/structures`, `/admin/fees/installments`, `/admin/fees/discounts`, `/admin/fees/refunds`.
